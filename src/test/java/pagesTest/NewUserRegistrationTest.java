@@ -32,6 +32,8 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.click_on_next_button_of_step_one_with_agree_to_terms_direct_to_step_two();
 	}
 	
+	// abc
+	
 	
 	
 	
