@@ -255,7 +255,7 @@ public class NewUserRegistration {
 	WebElement nextButtonStep2;
 	
 	
-	
+	// Step #3: Create User ID, Password & Security Question/Answer
 	@FindBy(id = "cms-create-id-password")
 	WebElement stepThreeHeader;
 
@@ -264,6 +264,87 @@ public class NewUserRegistration {
 	
 	@FindBy(xpath = "(//p[contains(text(), 'All')])[2]")
 	WebElement stepThreeOtherHeader;
+	
+	@FindBy(xpath = "(//a[contains(text(), 'Cancel')])[3]")
+	WebElement stepThreeCancel;	
+	
+	@FindBy(id = "step3buttonBack")
+	WebElement stepThreeBackButton;
+	
+	@FindBy(id = "step3btnNxt")
+	WebElement stepThreeNextButton;
+	
+	// User Id
+	@FindBy(id = "cms-newuser-newuserId")
+	WebElement userId;
+	
+	@FindBy(xpath = "//span[contains(text(), 'Required field.')]")
+	WebElement requiredFieldErrorMessageUnderTheUserId;
+	
+	@FindBy(xpath = "//a[contains(text(), 'User ID')]")
+	WebElement userIdErrorMessageOnTheTopOfThePage;
+	
+	@FindBy(xpath = "//span[contains(text(), ' Please refer to User ID requirements.')]")
+	WebElement referToRequirementErrorMessageUnderTheUserIdField;
+		
+	// Password	
+	@FindBy(id = "cms-newuser-password")
+	WebElement password;
+	
+	@FindBy(xpath = "//span[contains(text(), 'Required field.')]")
+	WebElement requiredFieldErrorMessageUnderThePassword;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Password')]")
+	WebElement passwordErrorMessageOnTheTopOfThePage;
+	
+	// Confirm Password
+	@FindBy(id = "cms-newuser-confirmPassword")
+	WebElement confirmNewPassword;
+	
+	@FindBy(xpath = "//span[contains(text(), 'Required field.')]")
+	WebElement requiredFieldErrorMessageUnderTheConfirmNewPassword;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Confirm New Password')]")
+	WebElement confirmNewPasswordErrorMessageOnTheTopOfThePage;
+	
+	// Security Question
+	@FindBy(id = "cms-newuser-securityQuestion")
+	WebElement securityQuestion;
+	
+	@FindBy(xpath = "//select[@id='cms-newuser-securityQuestion']/option")
+	List<WebElement> securityQuestionList;
+	
+	@FindBy(xpath = "//span[contains(text(), 'Required field.')]")
+	WebElement requiredFieldErrorMessageUnderTheSecurityQuestion;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Security Question')]")
+	WebElement securityQuestionErrorMessageOnTheTopOfThePage;
+	
+	// Security Answer
+	@FindBy(id = "cms-newuser-securityAnswer")
+	WebElement securityAnswer;
+	
+	@FindBy(xpath = "//span[text() = ' Required field.']")
+	WebElement requiredFieldErrorMessageUnderTheSecurityAnswer;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Security Answer')]")
+	WebElement securityAnswerErrorMessageOnTheTopOfThePage;
+		
+	// New User Registration Summary
+	@FindBy(xpath = "//h1[text()='New User Registration Summary']")
+	WebElement summaryPageHeader;
+
+	@FindBy(xpath = "//p[text()=' Please review your information and make any necessary changes before submitting . ']")
+	WebElement summaryPageSubHeader;
+	
+	@FindBy(xpath = "(//a[contains(text(), 'Cancel')])[4]")
+	WebElement summaryPageCancel;	
+	
+	@FindBy(id = "submitUser")
+	WebElement submitUser;
+	
+	@FindBy(xpath = "//span[contains(text(), 'An email has been sent')]")
+	WebElement successMessage;
 	
 	public void landing_on_new_user_registration_page_step_one() {
 		pause(3000);
@@ -318,7 +399,7 @@ public class NewUserRegistration {
 		pause(3000);
 	}
 
-	public void step_two_title_and_header_validation() {
+	public void step_two_title_and_header () {
 		verifyTitle(driver, "CMS Enterprise Portal - New User Registration");
 		verifyCurrentUrl(driver, "https://portal.cms.gov/portal/newuserregistration");
 		validationOfHeader(stepTwoHeader, "Step #2: Register Your Information");
@@ -391,7 +472,7 @@ public class NewUserRegistration {
 		pause(3000);
 	}
 	
-	public void first_name_validation() {
+	public void first_name () {
 		verifyLengthOfTheFieldContent(firstName, Attribute.MAX_LENGTH, "20");
 		inputTextThenClickTab(firstName, "%*&$^%*^*");
 		verifyErrorMessageUnderTheField(alphabeticCharactersErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be alphabetic characters.");
@@ -408,7 +489,7 @@ public class NewUserRegistration {
 		pause(3000);
 	}
 	
-	public void middle_name_validation() {
+	public void middle_name () {
 		verifyLengthOfTheFieldContent(middleName, Attribute.MAX_LENGTH, "20");
 		inputTextThenClickTab(middleName, "% & \\\" ( )");
 		verifyErrorMessageUnderTheField(alphabeticCharactersErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be alphabetic characters.");
@@ -428,7 +509,7 @@ public class NewUserRegistration {
 		pause(3000);
 	}
 	
-	public void last_name_validation() {
+	public void last_name () {
 		verifyLengthOfTheFieldContent(lastName, Attribute.MAX_LENGTH, "25");
 		inputTextThenClickTab(lastName, "% & \\\" ( )");
 		verifyErrorMessageUnderTheField(alphabeticCharactersErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be alphabetic characters.");
@@ -445,14 +526,14 @@ public class NewUserRegistration {
 		pause(3000);
 	}
 	
-	public void suffix_validation() {
+	public void suffix () {
 		selectElelementFromDropdownOnebyOne(suffix, suffixList);
 		pause(3000);
 		selectDropdown(suffix, "SR");
 		pause(3000);
 	}
 	
-	public void birth_month_validation() {	
+	public void birth_month () {	
 		selectElelementFromDropdownOnebyOne(birthMonth, birthMonthList);
 		pause(3000);
 		selectDropdown(birthMonth, "Select Birth Month");
@@ -465,7 +546,7 @@ public class NewUserRegistration {
 		pause(3000);					
 	}
 	
-	public void birth_year_validation() {	
+	public void birth_year () {	
 		selectElelementFromDropdownOnebyOne(birthYear, birthYearList);
 		pause(3000);
 		selectDropdown(birthYear, "Select Birth Year");
@@ -478,7 +559,7 @@ public class NewUserRegistration {
 		pause(3000);		
 	}
 	
-	public void birth_date_validation() {	
+	public void birth_date () {	
 		selectElelementFromDropdownOnebyOne(birthDate, birthDateList);
 		pause(3000);
 		selectDropdown(birthDate, "Select Birth Date");
@@ -491,7 +572,7 @@ public class NewUserRegistration {
 		pause(3000);		
 	}
 	
-	public void addressLine1Validation() {
+	public void address_line1 () {
 		clickElement(nonUsBasedAddress);
 		pause(3000);
 		clickElement(usBasedAddress);
@@ -509,7 +590,7 @@ public class NewUserRegistration {
 		pause(3000);
 	}
 	
-	public void addressLine2Validation() {
+	public void address_line2 () {
 		verifyLengthOfTheFieldContent(addressLine2, Attribute.MAX_LENGTH, "64");
 		inputTextThenClickTab(addressLine2, " * < > ^ ! # $ + / : ; = ? @ [ ] ");
 		verifyErrorMessageUnderTheField(alphanumericCharactersErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be alphanumeric characters.");
@@ -520,7 +601,7 @@ public class NewUserRegistration {
 		pause(3000);
 	}
 	
-	public void cityValidation() {
+	public void city () {
 		verifyLengthOfTheFieldContent(city, Attribute.MAX_LENGTH, "30");
 		pause(3000);
 		inputTextThenClickTab(city, " > ^ ! # $ + / : ; = ? @");		
@@ -541,7 +622,7 @@ public class NewUserRegistration {
 		pause(3000);
 	}
 	
-	public void stateValidation() {
+	public void state () {
 		selectDropdown(state, "New York"); // function is not same as Birth Month
 		pause(3000);
 		selectDropdown(state, "Select State");
@@ -556,7 +637,7 @@ public class NewUserRegistration {
 		pause(3000);
 	}
 	
-	public void zipCodeValidation() {
+	public void zip_code () {
 		verifyLengthOfTheFieldContent(zipCode, Attribute.MAX_LENGTH, "5");	
 		inputTextThenClickTab(zipCode, "1002");
 		pause(3000);
@@ -577,7 +658,7 @@ public class NewUserRegistration {
 		pause(3000);
 	}
 	
-	public void zipCodePlus4Validation() {
+	public void zip_code_plus4 () {
 		verifyLengthOfTheFieldContent(zipCodeExt, Attribute.MAX_LENGTH, "4");
 		inputTextThenClickTab(zipCodeExt, "100");
 		verifyErrorMessageUnderTheField(numericZipPlus4CodeErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be a valid numeric ZIP+4 Code.");		
@@ -595,7 +676,7 @@ public class NewUserRegistration {
 		pause(3000);
 	}
 	
-	public void emailValidation() {
+	public void email () {
 		verifyLengthOfTheFieldContent(email, Attribute.MAX_LENGTH, "74");
 		inputTextThenClickTab(email, "^%&^%^%&");
 //		pause(3000);
@@ -614,7 +695,7 @@ public class NewUserRegistration {
 		// Need to find out the requirements for email configuration
 	}
 	
-	public void emailConfirmValidation() {
+	public void confirm_email () {
 		verifyLengthOfTheFieldContent(confirmEmail, Attribute.MAX_LENGTH, "74");
 		inputTextThenClickTab(confirmEmail, "amtks483@gmail.com");
 		pause(3000);
@@ -628,7 +709,7 @@ public class NewUserRegistration {
 		pause(3000);
 	}
 	
-	public void phoneNumberValidation() {
+	public void phone_number () {
 		verifyLengthOfTheFieldContent(phoneNumber, Attribute.MAX_LENGTH, "12");
 		inputText(phoneNumber, "0929301602");
 		verifyErrorMessageUnderTheField(phoneNumberNotStartWithErrorMessageUnderTheField, Attribute.INNER_HTML, "Phone Number must not start with a 1 or 0.");
@@ -658,7 +739,7 @@ public class NewUserRegistration {
 		pause(3000);
 	}
 	
-	public void untilClickOnNextButtonInStep2WithData() {
+	public void happy_path_step_two() {
 		pause(3000);
 		inputText(firstName, "Moha'mm-ad Md");
 		pause(3000);
@@ -695,7 +776,7 @@ public class NewUserRegistration {
 		pause(3000);		
 	}
 	
-	public void stepThreeTitleAndHeaderValidation() {
+	public void step_three_title_and_header () {
 		verifyTitle(driver, "CMS Enterprise Portal - New User Registration");
 		verifyCurrentUrl(driver, "https://portal.cms.gov/portal/newuserregistration");
 		pause(3000);
@@ -704,6 +785,145 @@ public class NewUserRegistration {
 		validationOfOtherHeader(stepThreeOtherHeader, "All fields are required unless marked (optional).");
 		pause(3000);
 	}
+	
+	public void click_on_back_button_on_step_three_direct_to_step_two() {
+		elementEnabled(stepThreeBackButton);
+		verifyTextOfTheWebElement(stepThreeBackButton, "Back");
+		pause(4000);
+		clickElement(stepThreeBackButton);
+		pause(4000);
+		verifyCurrentUrl(driver, "https://portal.cms.gov/portal/newuserregistration");
+		verifyTitle(driver, "CMS Enterprise Portal - New User Registration");
+		validationOfHeader(stepTwoHeader, "Step #2: Register Your Information");
+		validationOfSubHeader(stepTwoSubHeader, "Step 2 of 3 - Please enter your personal and contact information.");
+		validationOfOtherHeader(stepTwoOtherHeader, "All fields are required unless marked (optional).");
+		pause(4000);
+	}
+	
+	public void click_on_cancel_button_on_step_three_direct_to_homepage() {
+		elementEnabled(stepThreeCancel);
+		verifyTextOfTheWebElement(stepThreeCancel, "Cancel");
+		pause(4000);
+		clickElement(stepThreeCancel);
+		pause(4000);
+		verifyCurrentUrl(driver, "https://portal.cms.gov/portal/");
+		verifyTitle(driver, "CMS Enterprise Portal");
+		pause(4000);
+	}
+	
+	public void click_on_next_button_of_step_three() {
+		elementEnabled(stepThreeNextButton);
+		verifyTextOfTheWebElement(stepThreeNextButton, "Next");
+		pause(3000);
+		clickElement(stepThreeNextButton);
+		pause(3000);
+	}
+	
+	public void error_message_under_and_top_of_the_page_on_step_three() {
+		verifyErrorMessageOnTheTopOfThePage(userIdErrorMessageOnTheTopOfThePage, Attribute.INNER_HTML, "User ID is a required field.");
+		verifyErrorMessageOnTheTopOfThePage(passwordErrorMessageOnTheTopOfThePage, Attribute.INNER_HTML, "Password is a required field.");
+		verifyErrorMessageOnTheTopOfThePage(confirmNewPasswordErrorMessageOnTheTopOfThePage, Attribute.INNER_HTML, "Confirm New Password is a required field.");
+		verifyErrorMessageOnTheTopOfThePage(securityQuestionErrorMessageOnTheTopOfThePage, Attribute.INNER_HTML, "Security Question is a required field.");
+		verifyErrorMessageOnTheTopOfThePage(securityAnswerErrorMessageOnTheTopOfThePage, Attribute.INNER_HTML, "Security Answer is a required field.");		
+		pause(5000);		
+		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderTheUserId, Attribute.INNER_HTML, "Required field.");
+		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderThePassword, Attribute.INNER_HTML, "Required field.");
+		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderTheConfirmNewPassword, Attribute.INNER_HTML, "Required field.");
+		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderTheSecurityQuestion, Attribute.INNER_HTML, "Required field.");
+		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderTheSecurityAnswer, Attribute.INNER_HTML, " Required field."); // change here
+		pause(3000);
+	}
+	
+	public void userId () {
+		verifyLengthOfTheFieldContent(userId, Attribute.MAX_LENGTH, "74");
+		/*
+		 We have create user id, by 5, 74 characters, without letter, user any email, 
+		    - Cannot contain 9 consecutive numbers.
+			- Cannot begin or end with special characters.
+			- Cannot contain more than 1 consecutive special character.
+		 */
+		inputTextThenClickTab(userId, "&^%*&#^$%");
+		pause(3000);
+		verifyErrorMessageUnderTheField(referToRequirementErrorMessageUnderTheUserIdField, Attribute.INNER_HTML, "Please refer to User ID requirements.");
+		pause(3000);
+		clearTextFromTheField(userId);
+		pause(3000);
+		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderTheUserId, Attribute.INNER_HTML, "Required field.");
+		pause(3000);		
+		inputText(userId, "Enthrall_20221");
+		pause(3000);
+	}
+	
+	public void password () {
+		// need validation based on requirements
+	}
+	
+	public void confirmNewPassword () {
+		// need validation based on requirements
+	}
+	
+	public void securityQuestion () {
+		selectElelementFromDropdownOnebyOne(securityQuestion, securityQuestionList);
+		pause(3000);
+		selectDropdown(securityQuestion, "What was the first thing you learned to cook?");
+		pause(3000);
+	}
+	
+	public void securityAnswer () {
+		// need validation based on requirements
+	}
+	
+	public void happy_path_step_three() {
+		inputTextThenClickTab(userId, "Enthrall_20221");
+		pause(3000);
+		inputTextThenClickTab(password, "EIT@2024eit@2024");
+		pause(3000);
+		inputTextThenClickTab(confirmNewPassword, "EIT@2024eit@2024");
+		pause(3000);
+		selectDropdown(securityQuestion, "What was the first thing you learned to cook?");
+		pause(3000);
+		inputText(securityAnswer, "Rice");
+		pause(3000);		
+	}
+	
+	public void summary_page_title_and_header () {
+		verifyTitle(driver, "CMS Enterprise Portal - New User Registration");
+		verifyCurrentUrl(driver, "https://portal.cms.gov/portal/newuserregistration");
+		pause(3000);
+		validationOfHeader(summaryPageHeader, "New User Registration Summary");
+		validationOfSubHeader(summaryPageSubHeader, "Please review your information and make any necessary changes before submitting .");
+		pause(3000);
+	}
+	
+	public void click_on_cancel_button_on_summary_page_direct_to_homepage() {
+		elementEnabled(summaryPageCancel);
+		verifyTextOfTheWebElement(summaryPageCancel, "Cancel");
+		pause(4000);
+		clickElement(summaryPageCancel);
+		pause(4000);
+		verifyCurrentUrl(driver, "https://portal.cms.gov/portal/");
+		verifyTitle(driver, "CMS Enterprise Portal");
+		pause(4000);
+	}
+	
+	public void click_on_submit_user_button_of_summary_page() {
+		scrollIntoViewTheElementUsingJavascriptExecutor(driver, summaryPageCancel);
+		elementEnabled(submitUser);
+		verifyTextOfTheWebElement(submitUser, "Submit User");
+		pause(3000);
+		clickElement(submitUser);
+		pause(3000);
+	}
+	
+	public void success_message () {
+		verifyTitle(driver, "CMS Enterprise Portal - New User Registration");
+		verifyCurrentUrl(driver, "https://portal.cms.gov/portal/newuserregistration");
+		pause(3000);
+		verifyTextOfTheWebElement(successMessage, "Your User ID has been successfully registered with CMS Enterprise Portal. An email has been sent to your registered email address.");
+		pause(3000);
+	}
+	
+	
 	
 	
 
