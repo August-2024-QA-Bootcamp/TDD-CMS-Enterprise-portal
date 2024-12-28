@@ -482,7 +482,20 @@ public class CommonActions {
 		Loggers.logTheTest("JavascriptExecutor executing ..." + script + " to input Text on element ---> " + hiddenElement);			
 		String value = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById('displayed-text').value");
 		Loggers.logTheTest("Value entered in hidden field: " + value);								
-	}		
+	}	
+	
+	// This is used for parameterized test
+	public static void verifyErrorMessage (WebElement element, Attribute attribute, String expectedErrorMessage) {
+		try {
+			String actualErrorMessage = getAttributeValue(element, attribute);
+			Loggers.logTheTest("The Web Element " + element + " ---> has Actual Error Message : " + actualErrorMessage + " and Expected Error Message : " + expectedErrorMessage);
+			Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Error Message doesn't match");
+		} catch (NoSuchElementException | NullPointerException e) {
+			e.printStackTrace();
+			Loggers.logTheTest(element + "<----------> has not been found\n" + e.getMessage() );
+			Assert.fail();
+		}
+	}
 				
 		
 		
