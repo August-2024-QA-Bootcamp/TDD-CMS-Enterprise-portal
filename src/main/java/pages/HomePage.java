@@ -3,12 +3,10 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import constants.Attribute;
 import static common.CommonActions.*;
-import static common.CommonWaits.*;
 
 import java.time.Duration;
 
@@ -37,7 +35,8 @@ public class HomePage {
 	}
 	
 	public void click_to_new_user_registration() {
-		pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(newUserRegistration));
+		//pause(3000);
 		elementEnabled(newUserRegistration);
 		verifyTextOfTheWebElement(newUserRegistration, "New User Registration");
 		clickElement(newUserRegistration);

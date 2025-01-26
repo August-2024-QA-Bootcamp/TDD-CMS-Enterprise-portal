@@ -1,52 +1,31 @@
 package pagesTest;
 
-import static common.CommonActions.clearTextFromTheField;
-import static common.CommonActions.clickElement;
-import static common.CommonActions.clickElementThenTab;
-import static common.CommonActions.elementEnabled;
-import static common.CommonActions.inputText;
-import static common.CommonActions.inputTextThenClickTab;
-import static common.CommonActions.pause;
-import static common.CommonActions.scrollIntoViewTheElementUsingJavascriptExecutor;
-import static common.CommonActions.selectDropdown;
-import static common.CommonActions.selectElelementFromDropdownOnebyOne;
-import static common.CommonActions.validationOfHeader;
-import static common.CommonActions.validationOfOtherHeader;
-import static common.CommonActions.validationOfSubHeader;
-import static common.CommonActions.verifyCurrentUrl;
-import static common.CommonActions.verifyErrorMessageOnTheTopOfThePage;
-import static common.CommonActions.verifyErrorMessageUnderTheField;
-import static common.CommonActions.verifyLengthOfTheFieldContent;
-import static common.CommonActions.verifyTextOfTheWebElement;
-import static common.CommonActions.verifyTitle;
-
 import org.testng.annotations.Test;
 import baseUtil.BaseClass;
-import constants.Attribute;
 
 public class NewUserRegistrationTest extends BaseClass {
 	
-	@Test
+	@Test(groups = "smoke")
 	public void landing_on_new_user_registration_page_step_one_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.landing_on_new_user_registration_page_step_one();		
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void click_on_next_button_of_step_one_without_agree_to_terms_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
 		newUserRegistration.click_on_next_button_of_step_one_without_agree_to_terms();		
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void click_on_cancel_button_of_step_One_direct_to_homePage_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
 		newUserRegistration.click_on_cancel_button_of_step_One_direct_to_homePage();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void click_on_next_button_of_step_one_with_agree_to_terms_direct_to_step_two_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -54,7 +33,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.step_two_title_and_header();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void click_on_back_button_on_step_two_direct_to_step_one_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -62,7 +41,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.click_on_back_button_on_step_two_direct_to_step_one();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void click_on_cancel_button_on_step_two_direct_to_homepage_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -70,7 +49,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.click_on_cancel_button_on_step_two_direct_to_homepage();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void click_on_next_button_on_step2_without_any_data_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -79,7 +58,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.error_message_under_and_top_of_the_page_on_step_two();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void first_name_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -87,7 +66,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.first_name();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void middle_name_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -95,7 +74,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.middle_name();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void last_name_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -103,7 +82,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.last_name();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void suffix_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -111,7 +90,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.suffix();	
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void birth_month_test() {	
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -119,7 +98,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.birth_month();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void birth_year_test() {	
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -127,7 +106,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.birth_year();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void birth_date_test() {	
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -135,7 +114,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.birth_date();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void address_line1_test () {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -143,7 +122,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.address_line1();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void address_line2_test () {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -151,7 +130,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.address_line2();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void city_test () {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -159,7 +138,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.city();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void state_test () {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -167,7 +146,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.state();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void zip_code_test () {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -175,7 +154,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.zip_code();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void zip_code_plus4_test () {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -183,7 +162,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.zip_code_plus4();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void email_test () {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -191,7 +170,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.email();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void confirm_email_test () {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -199,7 +178,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.confirm_email();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void phone_number_test () {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -207,7 +186,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.phone_number();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void click_on_next_button_of_step_two_with_data_direct_to_step_three_test(){
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -216,7 +195,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.click_on_next_button_of_step_two();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void step_three_title_and_header_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -226,7 +205,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.step_three_title_and_header();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void click_on_back_button_on_step_three_direct_to_step_two_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -236,7 +215,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.click_on_back_button_on_step_three_direct_to_step_two();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void click_on_cancel_button_on_step_three_direct_to_homepage_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -246,7 +225,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.click_on_cancel_button_on_step_three_direct_to_homepage();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void click_on_next_button_on_step_three_without_any_data_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -257,7 +236,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.error_message_under_and_top_of_the_page_on_step_three();
 	}	
 	
-	@Test
+	@Test(groups = "regression")
 	public void click_on_next_button_of_step_three_with_data_direct_to_summary_page_test(){
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -268,7 +247,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.click_on_next_button_of_step_three();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void summary_page_title_and_header_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -280,7 +259,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.summary_page_title_and_header();
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public void click_on_submit_user_button_of_summary_page_direct_to_success_message_test(){
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();

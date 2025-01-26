@@ -6,7 +6,7 @@
 		<!-- group fails have to work on it-->
 		<groups>
 			<run>
-				<include name="regressionTest"></include>
+				<exclude name="regression"></exclude>
 			</run>
 		</groups>	
 		<classes>

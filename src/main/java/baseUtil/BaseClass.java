@@ -57,7 +57,7 @@ public class BaseClass {
 	
 	@Parameters("browser")
 	@BeforeMethod	
-	public void setUp(@Optional(EDGE) String browserName) {		
+	public void setUp(@Optional(CHROME) String browserName) {		
 		initDriver(browserName);
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
@@ -71,19 +71,49 @@ public class BaseClass {
 	
 	public void initDriver(String browserName) {
 
-		switch (browserName) {
+		String os = System.getProperty("os.name");
+		
+		switch (browserName) 
+		{
+		
 		case CHROME:
-			System.setProperty("webdriver.chrome.driver", "./driver/chromedriver.exe");
+			
+			if (os.toLowerCase().contains("win")) 
+			{
+				System.setProperty("webdriver.chrome.driver", "./driver/chromedriver.exe");
+			} 
+			else
+			{
+				WebDriverManager.chromedriver().setup();
+			}
+			
 			driver = new ChromeDriver();
 			break;
 
 		case FIREFOX:
-			System.setProperty("webdriver.gecko.driver", "./driver/geckodriver.exe");
+			
+			if (os.toLowerCase().contains("win")) 
+			{
+				System.setProperty("webdriver.gecko.driver", "./driver/geckodriver.exe");
+			}
+			else
+			{
+				WebDriverManager.firefoxdriver().setup();
+			}
+			
 			driver = new FirefoxDriver();
 			break;
 			
 		case EDGE:
-			System.setProperty("webdriver.edge.driver", "./driver/msedgedriver.exe");		
+			
+			if (os.toLowerCase().contains("win")) 
+			{
+				System.setProperty("webdriver.edge.driver", "./driver/msedgedriver.exe");	
+			} 
+			else 
+			{
+				WebDriverManager.edgedriver().setup();
+			}
 			driver = new EdgeDriver();
 			break;
 			
