@@ -1,5 +1,6 @@
 def gv
 
+CODE_CHANGES = getGitChanges()
 pipeline
 {
 	agent any
@@ -36,12 +37,18 @@ pipeline
 		}
 		stage("build")
 		{
+			when
+			{
+				expression
+				{
+					CODE_CHANGES == true
+				}
+			}
 			steps
 			{
-				script
-				{
-					gv.buildApp()
-				}
+				echo 'building the application ...'
+				echo "building version ${NEW_VER}"
+				gv.buildApp()
 			}
 		}
 		stage("testing")
@@ -53,25 +60,28 @@ pipeline
 					params.executeTests || BRNACH_NAME == 'cicd' || BRANCH_NAME == 'main'
 				}
 			}
-			
 			steps
 			{
+				echo 'testing the application ...'
+				echo 'testing ${VERSION}'
+				gv.testApp()
 				sh "mvn clean verify -Dsuite=regression_suite"
-				
-				script
-				{
-					gv.testApp()
-				}
 			}
 		}
 		stage("deploy")
 		{
 			steps
 			{
-				script
+				echo 'deploying the application ...'
+				echo "deploying with ${SERVER_CREDS}"
+				sh "${SERVER_CREDS}"
+				withCredentials([
+					usernamePassword(credentials: 'server-cred', usernameVariable: USER, passwordVariable: PWD)
+				])
 				{
-					gv.deployApp()
+					sh "some scripts ${USER} ${PWD}"
 				}
+				gv.deployApp()
 			}
 		}
 	}
