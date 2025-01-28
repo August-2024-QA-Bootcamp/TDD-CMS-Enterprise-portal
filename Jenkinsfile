@@ -56,7 +56,7 @@ pipeline
 					usernamePassword(credentials: 'server-cred', usernameVariable: USER, passwordVariable: PWD)
 				])
 				{
-					sh "some scripts ${USER} ${PWD}"
+					sh "${USER} ${PWD}"
 				}
 			}
 		}
