@@ -28,6 +28,7 @@ pipeline
 			{
 				echo 'building the application ...'
 				echo "building version ${NEW_VER}"
+				sh "mvn clean verify -Dsuite=regression_suite"
 			}
 		}
 		stage("testing")
