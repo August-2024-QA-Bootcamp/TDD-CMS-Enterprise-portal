@@ -52,12 +52,6 @@ pipeline
 				echo 'deploying the application ...'
 				echo "deploying with ${SERVER_CREDS}"
 				sh "${SERVER_CREDS}"
-				withCredentials([
-					usernamePassword(credentials: 'server-cred', usernameVariable: USER, passwordVariable: PWD)
-				])
-				{
-					sh "${USER} ${PWD}"
-				}
 			}
 		}
 	}
