@@ -1,3 +1,5 @@
+def gv
+
 pipeline
 {
 	agent any
@@ -22,13 +24,21 @@ pipeline
 	
 	stages
 	{
+		stage("init")
+		{
+			steps
+			{
+				script
+				{
+					gv = load "script.groovy"
+				}
+			}
+		}
 		stage("build")
 		{
 			steps
 			{
-				echo 'building the application ...'
-				echo "building version ${NEW_VER}"
-				sh "mvn clean verify -Dsuite=regression_suite"
+				gv.buildApp()
 			}
 		}
 		stage("testing")
@@ -42,16 +52,15 @@ pipeline
 			}
 			steps
 			{
-				echo 'testing the application ...'
-				echo 'testing ${VERSION}'
+				gv.testApp()
+				sh "mvn clean verify -Dsuite=regression_suite"
 			}
 		}
 		stage("deploy")
 		{
 			steps
 			{
-				echo 'deploying the application ...'
-				echo "deploying with ${SERVER_CREDS}"
+				gv.deployApp()
 			}
 		}
 	}
