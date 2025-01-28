@@ -51,7 +51,6 @@ pipeline
 			{
 				echo 'deploying the application ...'
 				echo "deploying with ${SERVER_CREDS}"
-				sh "${SERVER_CREDS}"
 			}
 		}
 	}
