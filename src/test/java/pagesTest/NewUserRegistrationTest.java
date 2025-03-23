@@ -5,27 +5,27 @@ import baseUtil.BaseClass;
 
 public class NewUserRegistrationTest extends BaseClass {
 	
-	@Test(groups = "smoke")
+	@Test(groups = "smoke", priority = 1)
 	public void landing_on_new_user_registration_page_step_one_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.landing_on_new_user_registration_page_step_one();		
 	}
 	
-	@Test(groups = "regression")
+	@Test(groups = "smoke", priority = 2)
 	public void click_on_next_button_of_step_one_without_agree_to_terms_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
 		newUserRegistration.click_on_next_button_of_step_one_without_agree_to_terms();		
 	}
 	
-	@Test(groups = "regression")
+	@Test(groups = "smoke", priority = 3)
 	public void click_on_cancel_button_of_step_One_direct_to_homePage_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
 		newUserRegistration.click_on_cancel_button_of_step_One_direct_to_homePage();
 	}
 	
-	@Test(groups = "regression")
+	@Test(groups = "smoke", priority = 4)
 	public void click_on_next_button_of_step_one_with_agree_to_terms_direct_to_step_two_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();
@@ -33,7 +33,7 @@ public class NewUserRegistrationTest extends BaseClass {
 		newUserRegistration.step_two_title_and_header();
 	}
 	
-	@Test(groups = "regression")
+	@Test(groups = "smoke", priority = 5)
 	public void click_on_back_button_on_step_two_direct_to_step_one_test() {
 		homePage.click_to_new_user_registration();
 		newUserRegistration.select_your_application_on_new_user_registration_page_step_one();

@@ -21,7 +21,7 @@ public class NewUserRegistration {
 	public NewUserRegistration(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
-		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 	}
 	
 	// Step #1: Select Your Application
@@ -37,7 +37,7 @@ public class NewUserRegistration {
 	@FindBy(xpath = "//p[contains(text(), 'Step 1 of 3')]")
 	WebElement stepOneSubHeader;
 	
-	@FindBy(xpath = "//div[@class='ng-input']")
+	@FindBy(id = "ngSelectApp")
 	WebElement selectYourApplication;
 
 	@FindBy(id = "textSearch")
@@ -370,9 +370,9 @@ public class NewUserRegistration {
 		elementEnabled(stepOneNextButton);
 		verifyTextOfTheWebElement(stepOneNextButton, "Next");
 		clickElement(stepOneNextButton);
-		pause(3000);
+		//pause(3000);
 		verifyErrorMessageUnderTheField(agreeToTheTermsErrorMessag, Attribute.INNER_HTML, "Please agree to the Terms &amp; Conditions.");		
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void click_on_cancel_button_of_step_One_direct_to_homePage() {
@@ -727,7 +727,7 @@ public class NewUserRegistration {
 		wait.until(ExpectedConditions.visibilityOf(email));
 		verifyLengthOfTheFieldContent(email, Attribute.MAX_LENGTH, "74");
 		inputTextThenClickTab(email, "^%&^%^%&");
-//		pause(3000);
+//		//pause(3000);
 //		verifyErrorMessageUnderTheField(email, "Must be a valid Email Address.");		// actual error message is not received
 		//pause(3000);
 		clearTextFromTheField(email);
@@ -736,7 +736,7 @@ public class NewUserRegistration {
 		//pause(3000);
 //		inputText(email, "12345");
 //		verifyErrorMessageUnderTheField(email, "Must be a valid Email Address.");
-//		pause(3000);
+//		//pause(3000);
 //		clearTextFromTheField(email);
 		inputText(email, "tofael483@gmail.com");
 		//pause(3000);
