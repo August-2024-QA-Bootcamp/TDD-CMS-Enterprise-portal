@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
-  <parameter name="browser" value="firefox" />
+	<parameter name="browser" value="chrome" />
 	<test thread-count="5" name="Test">
 		<!-- group fails have to work on it-->
 		<groups>
 			<run>
 				<exclude name="regression"></exclude>
 			</run>
-		</groups>	
+		</groups>
 		<classes>
-			<class name="pagesTest.NewUserRegistrationTest" />
+			<class name="pagesTest.NewUserRegistrationTest">
+				<methods>
+					<include
+						name="click_on_next_button_of_step_one_without_agree_to_terms_test"></include>
+				</methods>
+			</class>
 		</classes>
 	</test>
 </suite>

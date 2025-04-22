@@ -13,6 +13,7 @@ import constants.IResource;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -96,7 +97,7 @@ public class BaseClass {
                 } else {
                     WebDriverManager.chromedriver().setup();
                 }
-
+                
                 driver = new ChromeDriver();
                 break;
 
@@ -121,6 +122,21 @@ public class BaseClass {
                 driver = new EdgeDriver();
                 break;
 
+            case HEADLESS:
+
+                if (os.toLowerCase().contains("win")) {
+                    System.setProperty("webdriver.chrome.driver", "./driver/chromedriver.exe");
+                } else {
+                    WebDriverManager.chromedriver().setup();
+                }
+
+                // Headless, use browser value = ghost-mode in xml
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--headless=new");
+                
+                driver = new ChromeDriver(options);
+                break;
+                
             default:
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();

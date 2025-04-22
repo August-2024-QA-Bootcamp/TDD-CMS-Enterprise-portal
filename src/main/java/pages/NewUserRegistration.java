@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -361,6 +362,7 @@ public class NewUserRegistration {
 		elementDisplayed(selectYourApplication);
 		clickElement(selectYourApplication);
 		elementDisplayed(textSearchField);
+		driver.navigate().refresh();
 		inputTextThenClickEnter(textSearchField, "BCRS Web");
 	}
 	

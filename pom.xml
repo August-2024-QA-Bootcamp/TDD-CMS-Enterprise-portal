@@ -1,14 +1,19 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>august2024.tdd.gov.cms.portal</groupId>
 	<artifactId>august2024.tdd.gov.cms.portal</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>CMS Portal Framework</name>
-	<description>This framework is about Portal of Center for Medicare and  Medicaid services</description>
-	
+	<description>This framework is about Portal of Center for Medicare and
+		Medicaid services</description>
+
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
-		<!-- Selenium Java dependency is used to get access of Java based selenium-->
+		<!--
+		https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<!-- Selenium Java dependency is used to get access of Java based
+		selenium-->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
@@ -25,7 +30,8 @@
 
 		<!-- download from bonigarcia -->
 		<!-- when we use webdrivermanager, physical driver is not necessary -->
-		<!-- when we add a new dependency, don't build the framework, rather update project from maven -->
+		<!-- when we add a new dependency, don't build the framework, rather
+		update project from maven -->
 		<dependency>
 			<groupId>io.github.bonigarcia</groupId>
 			<artifactId>webdrivermanager</artifactId>
@@ -37,7 +43,8 @@
 			<artifactId>extentreports</artifactId>
 			<version>5.1.2</version>
 		</dependency>
-		<!-- slf4j-simple, slf4j-api is used to remove the error message regarding slf4j in the console -->
+		<!-- slf4j-simple, slf4j-api is used to remove the error message
+		regarding slf4j in the console -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -47,6 +54,13 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
 			<version>2.0.16</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>5.5.1</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
