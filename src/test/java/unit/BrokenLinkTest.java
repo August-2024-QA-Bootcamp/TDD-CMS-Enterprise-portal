@@ -79,5 +79,4 @@ public class BrokenLinkTest extends BaseClass {
 		
 		System.out.println(brokenLinkUrls);
 	}
-	// This is a broken link test
 }
