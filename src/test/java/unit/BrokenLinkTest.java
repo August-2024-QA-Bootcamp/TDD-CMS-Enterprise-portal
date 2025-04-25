@@ -20,7 +20,7 @@ public class BrokenLinkTest extends BaseClass {
 	public void test_rest_assured() {
 		// driver.get("https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/");
 		List<WebElement> links = driver.findElements(By.tagName("a"));
-		System.out.println("Number of links - " + links.size());
+		System.out.println("Number of links found - " + links.size());
 
 		List<String> brokenLinkUrls = new ArrayList<>();
 
@@ -79,4 +79,5 @@ public class BrokenLinkTest extends BaseClass {
 		
 		System.out.println(brokenLinkUrls);
 	}
+	// This is a test
 }
