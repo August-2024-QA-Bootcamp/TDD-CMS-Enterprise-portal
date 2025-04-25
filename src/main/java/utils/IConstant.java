@@ -12,6 +12,8 @@ public interface IConstant {
 	String FIREFOX = "firefox";
 	String EDGE = "edge";
 	String SAFARI = "safari";
-	
+	String HEADLESS = "ghost-mode";
+
+	String REMOTE = "remote";
 
 }

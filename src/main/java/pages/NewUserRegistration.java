@@ -1,10 +1,11 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import constants.Attribute;
 import static common.CommonActions.*;
@@ -21,7 +22,7 @@ public class NewUserRegistration {
 	public NewUserRegistration(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
-		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 	}
 	
 	// Step #1: Select Your Application
@@ -37,7 +38,7 @@ public class NewUserRegistration {
 	@FindBy(xpath = "//p[contains(text(), 'Step 1 of 3')]")
 	WebElement stepOneSubHeader;
 	
-	@FindBy(xpath = "//div[@class='ng-input']")
+	@FindBy(id = "ngSelectApp")
 	WebElement selectYourApplication;
 
 	@FindBy(id = "textSearch")
@@ -347,7 +348,8 @@ public class NewUserRegistration {
 	WebElement successMessage;
 	
 	public void landing_on_new_user_registration_page_step_one() {
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(stepOneHeader));
 		validationOfHeader(stepOneHeader, "Step #1: Select Your Application");
 		validationOfSubHeader(stepOneSubHeader, "Step 1 of 3 - Select your application from the dropdown. You will then need to agree to the terms & conditions.");
 		verifyTitle(driver, "CMS Enterprise Portal - New User Registration");
@@ -355,48 +357,55 @@ public class NewUserRegistration {
 	}
 	
 	public void select_your_application_on_new_user_registration_page_step_one() {
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(selectYourApplication));
 		elementDisplayed(selectYourApplication);
 		clickElement(selectYourApplication);
 		elementDisplayed(textSearchField);
+		driver.navigate().refresh();
 		inputTextThenClickEnter(textSearchField, "BCRS Web");
 	}
 	
 	public void click_on_next_button_of_step_one_without_agree_to_terms() {
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(stepOneNextButton));
 		elementEnabled(stepOneNextButton);
 		verifyTextOfTheWebElement(stepOneNextButton, "Next");
 		clickElement(stepOneNextButton);
-		pause(3000);
+		//pause(3000);
 		verifyErrorMessageUnderTheField(agreeToTheTermsErrorMessag, Attribute.INNER_HTML, "Please agree to the Terms &amp; Conditions.");		
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void click_on_cancel_button_of_step_One_direct_to_homePage() {
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(stepOneCancel));
 		scrollIntoViewTheElementUsingJavascriptExecutor(driver, stepOneCancel);
 		elementEnabled(stepOneCancel);
 		verifyTextOfTheWebElement(stepOneCancel, "Cancel");
 		clickUsingJavascriptExecutor(driver, stepOneCancel);
 		// above line is better, below line is ok too, but this cancel button take long tome to click
 		// clickElement(stepOneCancel);
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(logo));
 		verifyCurrentUrl(driver, "https://portal.cms.gov/portal/");
 		elementDisplayed(logo);
 		verifyTitle(driver, "CMS Enterprise Portal");
-		pause(3000);	
+		//pause(3000);	
 	}
 	
 	public void click_on_next_button_of_step_one_with_agree_to_terms_direct_to_step_two() {
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(stepOneNextButton));
 		scrollIntoViewTheElementUsingJavascriptExecutor(driver, stepOneNextButton);
 		elementDisplayed(agreeToTheTerms);
 		waitUntilTheConditionThenClick(driver, agreeToTheTerms);		
-		pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(stepOneNextButton));
+		//pause(3000);
 		elementEnabled(stepOneNextButton);
 		verifyTextOfTheWebElement(stepOneNextButton, "Next");
 		clickElement(stepOneNextButton);
-		pause(3000);
+		//pause(3000);
 	}
 
 	public void step_two_title_and_header () {
@@ -405,42 +414,45 @@ public class NewUserRegistration {
 		validationOfHeader(stepTwoHeader, "Step #2: Register Your Information");
 		validationOfSubHeader(stepTwoSubHeader, "Step 2 of 3 - Please enter your personal and contact information.");
 		validationOfOtherHeader(stepTwoOtherHeader, "All fields are required unless marked (optional).");
-		pause(4000);
+		//pause(4000);
 	}
 	
 	public void click_on_back_button_on_step_two_direct_to_step_one() {
 		scrollIntoViewTheElementUsingJavascriptExecutor(driver, stepTwoBackButton);
 		elementEnabled(stepTwoBackButton);
 		verifyTextOfTheWebElement(stepTwoBackButton, "Back");
-		pause(4000);
+		wait.until(ExpectedConditions.visibilityOf(stepOneNextButton));
+		//pause(4000);
 		clickElement(stepTwoBackButton);
-		pause(4000);
+		//pause(4000);
 		verifyCurrentUrl(driver, "https://portal.cms.gov/portal/newuserregistration");
 		verifyTitle(driver, "CMS Enterprise Portal - New User Registration");
 		validationOfHeader(stepOneHeader, "Step #1: Select Your Application");
 		validationOfSubHeader(stepOneSubHeader, "Step 1 of 3 - Select your application from the dropdown. You will then need to agree to the terms & conditions.");
-		pause(4000);
+		//pause(4000);
 	}
 	
 	public void click_on_cancel_button_on_step_two_direct_to_homepage() {
 		scrollIntoViewTheElementUsingJavascriptExecutor(driver, stepTwoCancel);
 		elementEnabled(stepTwoCancel);
 		verifyTextOfTheWebElement(stepTwoCancel, "Cancel");
-		pause(4000);
+		//pause(4000);
+		wait.until(ExpectedConditions.visibilityOf(stepTwoCancel));
 		clickElement(stepTwoCancel);
-		pause(4000);
+		//pause(4000);
 		verifyCurrentUrl(driver, "https://portal.cms.gov/portal/");
 		verifyTitle(driver, "CMS Enterprise Portal");
-		pause(4000);
+		//pause(4000);
 	}
 	
 	public void click_on_next_button_of_step_two() {
 		scrollIntoViewTheElementUsingJavascriptExecutor(driver, nextButtonStep2);
 		elementEnabled(nextButtonStep2);
 		verifyTextOfTheWebElement(nextButtonStep2, "Next");
-		pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(nextButtonStep2));
+		//pause(3000);
 		clickElement(nextButtonStep2);
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void error_message_under_and_top_of_the_page_on_step_two() {
@@ -456,7 +468,7 @@ public class NewUserRegistration {
 		verifyErrorMessageOnTheTopOfThePage(emailAddressMessageOnTheTopOfThePage, Attribute.INNER_HTML, "Email Address is a required field.");
 		verifyErrorMessageOnTheTopOfThePage(confirmEmailAddressMessageOnTheTopOfThePage, Attribute.INNER_HTML, "Confirm Email Address is a required field.");
 		verifyErrorMessageOnTheTopOfThePage(phoneNumberMessageOnTheTopOfThePage, Attribute.INNER_HTML, "Phone Number is a required field.");
-		pause(5000);
+		//pause(5000);
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderTheFirstName, Attribute.INNER_HTML, "Required field.");
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderLastName, Attribute.INNER_HTML, "Required field.");
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderBirthMonth, Attribute.INNER_HTML, "Required field.");
@@ -469,354 +481,399 @@ public class NewUserRegistration {
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderEmail, Attribute.INNER_HTML, "Required field.");
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderConfirmEmail, Attribute.INNER_HTML, "Required field.");
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderPhoneNumber, Attribute.INNER_HTML, "Required field.");
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void first_name () {
 		verifyLengthOfTheFieldContent(firstName, Attribute.MAX_LENGTH, "20");
 		inputTextThenClickTab(firstName, "%*&$^%*^*");
 		verifyErrorMessageUnderTheField(alphabeticCharactersErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be alphabetic characters.");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(firstName));
 		clearTextFromTheField(firstName);
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderTheFirstName, Attribute.INNER_HTML, "Required field.");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(firstName));
 		inputText(firstName, "47858634"); // input text then click tab is not necessary here
 		verifyErrorMessageUnderTheField(alphabeticCharactersErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be alphabetic characters.");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(firstName));
 		clearTextFromTheField(firstName);
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(firstName));
 		inputTextThenClickTab(firstName, "Mo ham-ma'd Mohammad"); // input text then click tab is not necessary here
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void middle_name () {
 		verifyLengthOfTheFieldContent(middleName, Attribute.MAX_LENGTH, "20");
 		inputTextThenClickTab(middleName, "% & \\\" ( )");
 		verifyErrorMessageUnderTheField(alphabeticCharactersErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be alphabetic characters.");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(middleName));
 		clearTextFromTheField(middleName);
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(middleName));
 		inputText(middleName, "6573684765");
 		verifyErrorMessageUnderTheField(alphabeticCharactersErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be alphabetic characters.");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(middleName));
 		clearTextFromTheField(middleName);
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(middleName));
 		inputTextThenClickTab(middleName, "To'fael Ka-bi rrr'-r");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(middleName));
 		clearTextFromTheField(middleName);
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(middleName));
 		inputTextThenClickTab(middleName, "");
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void last_name () {
 		verifyLengthOfTheFieldContent(lastName, Attribute.MAX_LENGTH, "25");
 		inputTextThenClickTab(lastName, "% & \\\" ( )");
 		verifyErrorMessageUnderTheField(alphabeticCharactersErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be alphabetic characters.");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(lastName));
 		clearTextFromTheField(lastName);
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderLastName, Attribute.INNER_HTML, "Required field.");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(lastName));
 		inputText(lastName, "6573684765");
 		verifyErrorMessageUnderTheField(alphabeticCharactersErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be alphabetic characters.");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(lastName));
 		clearTextFromTheField(lastName);
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(lastName));
 		inputTextThenClickTab(lastName, "S'- harkarr Sh''a--rka rr");
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void suffix () {
 		selectElelementFromDropdownOnebyOne(suffix, suffixList);
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(suffix));
 		selectDropdown(suffix, "SR");
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void birth_month () {	
 		selectElelementFromDropdownOnebyOne(birthMonth, birthMonthList);
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(birthMonth));
 		selectDropdown(birthMonth, "Select Birth Month");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(requiredFieldErrorMessageUnderBirthMonth));
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderBirthMonth, Attribute.INNER_HTML, " Required field.");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(birthMonthErrorMessageOnTheTopOfThePage));
 		verifyErrorMessageOnTheTopOfThePage(birthMonthErrorMessageOnTheTopOfThePage, Attribute.INNER_HTML, "Birth Month is a required field.");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(birthMonth));
 		selectDropdown(birthMonth, "February");
-		pause(3000);					
+		//pause(3000);					
 	}
 	
 	public void birth_year () {	
 		selectElelementFromDropdownOnebyOne(birthYear, birthYearList);
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(birthYear));
 		selectDropdown(birthYear, "Select Birth Year");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(birthYear));
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderBirthYear, Attribute.INNER_HTML, "Required field.");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(birthYearErrorMessageOnTheTopOfThePage));
 		verifyErrorMessageOnTheTopOfThePage(birthYearErrorMessageOnTheTopOfThePage, Attribute.INNER_HTML, "Birth Year is a required field.");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(birthYear));
 		selectDropdown(birthYear, "1996");
-		pause(3000);		
+		//pause(3000);		
 	}
 	
 	public void birth_date () {	
 		selectElelementFromDropdownOnebyOne(birthDate, birthDateList);
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(birthDate));
 		selectDropdown(birthDate, "Select Birth Date");
-		pause(3000);		
+		//pause(3000);	
+		wait.until(ExpectedConditions.visibilityOf(requiredFieldErrorMessageUnderBirthDate));
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderBirthDate, Attribute.INNER_HTML, " Required field.");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(birthDateErrorMessageOnTheTopOfThePage));
 		verifyErrorMessageOnTheTopOfThePage(birthDateErrorMessageOnTheTopOfThePage, Attribute.INNER_HTML, "Birth Date is a required field.");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(birthDate));
 		selectDropdown(birthDate, "29");
-		pause(3000);		
+		//pause(3000);		
 	}
 	
 	public void address_line1 () {
 		clickElement(nonUsBasedAddress);
-		pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(nonUsBasedAddress));
+		//pause(3000);
 		clickElement(usBasedAddress);
 		// start of addressLine 1 validation
 		verifyLengthOfTheFieldContent(addressLine1, Attribute.MAX_LENGTH, "60");
 		inputTextThenClickTab(addressLine1, " * < > ^ ! # $ + / : ; = ? @ [ ] ");
 		verifyErrorMessageUnderTheField(alphanumericCharactersErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be alphanumeric characters.");
-		pause(3000); // is not used in the industry, this is used when you scripting the test cases,
+		//pause(3000); // is not used in the industry, this is used when you scripting the test cases,
 		// we will comment out all and run, if failed, then we will use web driver wait
+		wait.until(ExpectedConditions.visibilityOf(addressLine1));
 		clearTextFromTheField(addressLine1);
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(requiredFieldErrorMessageUnderHomeAddressLine1));
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderHomeAddressLine1, Attribute.INNER_HTML, "Required field.");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(addressLine1));
 		inputText(addressLine1, "6.1E 97th-s S_t, 66"); // **NOTE: Special characters allowed are: (Space) ' ‐ , . _
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void address_line2 () {
 		verifyLengthOfTheFieldContent(addressLine2, Attribute.MAX_LENGTH, "64");
 		inputTextThenClickTab(addressLine2, " * < > ^ ! # $ + / : ; = ? @ [ ] ");
 		verifyErrorMessageUnderTheField(alphanumericCharactersErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be alphanumeric characters.");
-		pause(3000); 
+		//pause(3000); 
+		wait.until(ExpectedConditions.visibilityOf(addressLine2));
 		clearTextFromTheField(addressLine2);
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(addressLine2));
 		inputText(addressLine2, "A.pt 123123 E 1009th-s S_t, 66");
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void city () {
+		wait.until(ExpectedConditions.visibilityOf(city));
 		verifyLengthOfTheFieldContent(city, Attribute.MAX_LENGTH, "30");
-		pause(3000);
+		//pause(3000);
 		inputTextThenClickTab(city, " > ^ ! # $ + / : ; = ? @");		
 		verifyErrorMessageUnderTheField(alphabeticCharactersErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be alphabetic characters.");
-		pause(3000);
+		//pause(3000);
 		clearTextFromTheField(city);
-		pause(3000);
+		//pause(3000);
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderCity, Attribute.INNER_HTML, "Required field.");
-		pause(3000);
+		//pause(3000);
 		inputTextThenClickTab(city, "64783city");
-		pause(3000);
+		//pause(3000);
 		verifyErrorMessageUnderTheField(alphabeticCharactersErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be alphabetic characters.");
-		pause(3000);
+		//pause(3000);
 		clearTextFromTheField(city);
 		inputText(city, "Lindström");  // Real time bug of the Application
 		// another example: Winston-Salem, Clark's Mountain
 		// Arnesén and Lindström: Both cities in Minnesota have diacritics
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void state () {
+		wait.until(ExpectedConditions.visibilityOf(state));
 		selectDropdown(state, "New York"); // function is not same as Birth Month
-		pause(3000);
+		//pause(3000);
 		selectDropdown(state, "Select State");
-		pause(3000);
+		//pause(3000);
 		clickElementThenTab(state); // This common action is used only here
-		pause(3000);
+		//pause(3000);
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderState, Attribute.INNER_HTML, " Required field.");
-		pause(3000);
+		//pause(3000);
 		selectElelementFromDropdownOnebyOne(state, stateList);
-		pause(3000);
+		//pause(3000);
 		selectDropdown(state, "New York");
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void zip_code () {
+		wait.until(ExpectedConditions.visibilityOf(zipCode));
 		verifyLengthOfTheFieldContent(zipCode, Attribute.MAX_LENGTH, "5");	
 		inputTextThenClickTab(zipCode, "1002");
-		pause(3000);
+		//pause(3000);
 		verifyErrorMessageUnderTheField(numericZipCodeErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be a valid numeric ZIP Code.");
 		clearTextFromTheField(zipCode);
-		pause(3000);
+		//pause(3000);
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderZipCode, Attribute.INNER_HTML, "Required field.");
-		pause(3000);
+		//pause(3000);
 		inputTextThenClickTab(zipCode, " > ^ ! # $ + / : ; = ? @");
 		verifyErrorMessageUnderTheField(numericZipCodeErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be a valid numeric ZIP Code.");
-		pause(3000);
+		//pause(3000);
 		clearTextFromTheField(zipCode);
 		inputText(zipCode, "AaBcR");
 		verifyErrorMessageUnderTheField(numericZipCodeErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be a valid numeric ZIP Code.");
-		pause(3000);
+		//pause(3000);
 		clearTextFromTheField(zipCode);
 		inputText(zipCode, "10019");
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void zip_code_plus4 () {
+		wait.until(ExpectedConditions.visibilityOf(zipCodeExt));
 		verifyLengthOfTheFieldContent(zipCodeExt, Attribute.MAX_LENGTH, "4");
 		inputTextThenClickTab(zipCodeExt, "100");
 		verifyErrorMessageUnderTheField(numericZipPlus4CodeErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be a valid numeric ZIP+4 Code.");		
 		clearTextFromTheField(zipCodeExt);
-		pause(3000);
+		//pause(3000);
 		inputTextThenClickTab(zipCodeExt, " > ^ ! # $ + / : ; = ? @");
 		verifyErrorMessageUnderTheField(numericZipPlus4CodeErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be a valid numeric ZIP+4 Code.");
-		pause(3000);
+		//pause(3000);
 		clearTextFromTheField(zipCodeExt);
 		inputText(zipCodeExt, "AdBc");
 		verifyErrorMessageUnderTheField(numericZipPlus4CodeErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be a valid numeric ZIP+4 Code.");
-		pause(3000);
+		//pause(3000);
 		clearTextFromTheField(zipCodeExt);
 		inputText(zipCodeExt, "1001");
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void email () {
+		wait.until(ExpectedConditions.visibilityOf(email));
 		verifyLengthOfTheFieldContent(email, Attribute.MAX_LENGTH, "74");
 		inputTextThenClickTab(email, "^%&^%^%&");
-//		pause(3000);
+//		//pause(3000);
 //		verifyErrorMessageUnderTheField(email, "Must be a valid Email Address.");		// actual error message is not received
-		pause(3000);
+		//pause(3000);
 		clearTextFromTheField(email);
-		pause(3000);
+		//pause(3000);
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderEmail, Attribute.INNER_HTML, "Required field.");
-		pause(3000);
+		//pause(3000);
 //		inputText(email, "12345");
 //		verifyErrorMessageUnderTheField(email, "Must be a valid Email Address.");
-//		pause(3000);
+//		//pause(3000);
 //		clearTextFromTheField(email);
 		inputText(email, "tofael483@gmail.com");
-		pause(3000);
+		//pause(3000);
 		// Need to find out the requirements for email configuration
 	}
 	
 	public void confirm_email () {
+		wait.until(ExpectedConditions.visibilityOf(confirmEmail));
 		verifyLengthOfTheFieldContent(confirmEmail, Attribute.MAX_LENGTH, "74");
 		inputTextThenClickTab(confirmEmail, "amtks483@gmail.com");
-		pause(3000);
+		//pause(3000);
 		verifyErrorMessageUnderTheField(mismatchEmailAddressErrorMessageUnderTheField, Attribute.INNER_HTML, "Must match Email Address values.");
-		pause(3000);
+		//pause(3000);
 		clearTextFromTheField(confirmEmail);
-		pause(3000);
+		//pause(3000);
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderConfirmEmail, Attribute.INNER_HTML, "Required field.");
-		pause(3000);		
+		//pause(3000);		
 		inputText(confirmEmail, "tofael483@gmail.com");
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void phone_number () {
+		wait.until(ExpectedConditions.visibilityOf(phoneNumber));
 		verifyLengthOfTheFieldContent(phoneNumber, Attribute.MAX_LENGTH, "12");
 		inputText(phoneNumber, "0929301602");
 		verifyErrorMessageUnderTheField(phoneNumberNotStartWithErrorMessageUnderTheField, Attribute.INNER_HTML, "Phone Number must not start with a 1 or 0.");
-		pause(3000);
+		//pause(3000);
 		clearTextFromTheField(phoneNumber);
-		pause(3000);
+		//pause(3000);
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderPhoneNumber, Attribute.INNER_HTML, "Required field.");
-		pause(3000);
+		//pause(3000);
 		inputText(phoneNumber, "1929301602");
 		verifyErrorMessageUnderTheField(phoneNumberNotStartWithErrorMessageUnderTheField, Attribute.INNER_HTML, "Phone Number must not start with a 1 or 0.");
-		pause(3000);
+		//pause(3000);
 		clearTextFromTheField(phoneNumber);
-		pause(3000);
+		//pause(3000);
 		inputText(phoneNumber, "(3)*<>^9!#$+ ");
-		pause(3000);
+		//pause(3000);
 		verifyErrorMessageUnderTheField(validPhoneNumberErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be a valid Phone Number.");
-		pause(3000);
+		//pause(3000);
 		clearTextFromTheField(phoneNumber);
-		pause(3000);
+		//pause(3000);
 		inputText(phoneNumber, "ahsuchbs");
-		pause(3000);
+		//pause(3000);
 		verifyErrorMessageUnderTheField(validPhoneNumberErrorMessageUnderTheField, Attribute.INNER_HTML, "Must be a valid Phone Number.");
-		pause(3000);
+		//pause(3000);
 		clearTextFromTheField(phoneNumber);
-		pause(3000);
+		//pause(3000);
 		inputText(phoneNumber, "9293016028");
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void happy_path_step_two() {
-		pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(firstName));
+		//pause(3000);
 		inputText(firstName, "Moha'mm-ad Md");
-		pause(3000);
+		//pause(3000);
 		inputText(middleName, "To'fael Ka-bir");
-		pause(3000);
+		//pause(3000);
 		inputText(lastName, "S'- harkar");
-		pause(3000);
+		//pause(3000);
 		selectDropdown(suffix, "SR");
-		pause(3000);
+		//pause(3000);
 		selectDropdown(birthMonth, "February");
-		pause(3000);
+		//pause(3000);
 		selectDropdown(birthDate, "28");
-		pause(3000);
+		//pause(3000);
 		selectDropdown(birthYear, "1975");
-		pause(3000);
+		//pause(3000);
 		scrollIntoViewTheElementUsingJavascriptExecutor(driver, nextButtonStep2);
 		inputText(addressLine1, "6.1E 97th-s S_t, 66");
-		pause(3000);
+		//pause(3000);
 		inputText(addressLine2, "A.pt 123123 E 1009th-s S_t, 66");
-		pause(3000);
+		//pause(3000);
 		inputText(city, "Clark's Mountain"); // another example: Winston-Salem
-		pause(3000);
+		//pause(3000);
 		selectDropdown(state, "New York");
-		pause(3000);
+		//pause(3000);
 		inputText(zipCode, "10019");
-		pause(3000);
+		//pause(3000);
 		inputText(zipCodeExt, "1001");
-		pause(3000);
+		//pause(3000);
 		inputText(email, "tofael483@gmail.com");
-		pause(3000);
+		//pause(3000);
 		inputText(confirmEmail, "tofael483@gmail.com");
-		pause(3000);
+		//pause(3000);
 		inputText(phoneNumber, "9293016028");
-		pause(3000);		
+		//pause(3000);		
 	}
 	
 	public void step_three_title_and_header () {
 		verifyTitle(driver, "CMS Enterprise Portal - New User Registration");
 		verifyCurrentUrl(driver, "https://portal.cms.gov/portal/newuserregistration");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(stepThreeHeader));
 		validationOfHeader(stepThreeHeader, "Step #3: Create User ID, Password & Security Question/Answer");
 		validationOfSubHeader(stepThreeSubHeader, "Step 3 of 3 - Please create User ID and Password. Select a Security Question and provide Answer.");
 		validationOfOtherHeader(stepThreeOtherHeader, "All fields are required unless marked (optional).");
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void click_on_back_button_on_step_three_direct_to_step_two() {
+		wait.until(ExpectedConditions.visibilityOf(stepThreeBackButton));
 		elementEnabled(stepThreeBackButton);
 		verifyTextOfTheWebElement(stepThreeBackButton, "Back");
-		pause(4000);
+		//pause(4000);
 		clickElement(stepThreeBackButton);
-		pause(4000);
+		//pause(4000);
 		verifyCurrentUrl(driver, "https://portal.cms.gov/portal/newuserregistration");
 		verifyTitle(driver, "CMS Enterprise Portal - New User Registration");
 		validationOfHeader(stepTwoHeader, "Step #2: Register Your Information");
 		validationOfSubHeader(stepTwoSubHeader, "Step 2 of 3 - Please enter your personal and contact information.");
 		validationOfOtherHeader(stepTwoOtherHeader, "All fields are required unless marked (optional).");
-		pause(4000);
+		//pause(4000);
 	}
 	
 	public void click_on_cancel_button_on_step_three_direct_to_homepage() {
+		wait.until(ExpectedConditions.visibilityOf(stepThreeCancel));
 		elementEnabled(stepThreeCancel);
 		verifyTextOfTheWebElement(stepThreeCancel, "Cancel");
-		pause(4000);
+		//pause(4000);
 		clickElement(stepThreeCancel);
-		pause(4000);
+		//pause(4000);
 		verifyCurrentUrl(driver, "https://portal.cms.gov/portal/");
 		verifyTitle(driver, "CMS Enterprise Portal");
-		pause(4000);
+		//pause(4000);
 	}
 	
 	public void click_on_next_button_of_step_three() {
+		wait.until(ExpectedConditions.visibilityOf(stepThreeNextButton));
 		elementEnabled(stepThreeNextButton);
 		verifyTextOfTheWebElement(stepThreeNextButton, "Next");
-		pause(3000);
+		//pause(3000);
 		clickElement(stepThreeNextButton);
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void error_message_under_and_top_of_the_page_on_step_three() {
@@ -825,16 +882,17 @@ public class NewUserRegistration {
 		verifyErrorMessageOnTheTopOfThePage(confirmNewPasswordErrorMessageOnTheTopOfThePage, Attribute.INNER_HTML, "Confirm New Password is a required field.");
 		verifyErrorMessageOnTheTopOfThePage(securityQuestionErrorMessageOnTheTopOfThePage, Attribute.INNER_HTML, "Security Question is a required field.");
 		verifyErrorMessageOnTheTopOfThePage(securityAnswerErrorMessageOnTheTopOfThePage, Attribute.INNER_HTML, "Security Answer is a required field.");		
-		pause(5000);		
+		//pause(5000);		
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderTheUserId, Attribute.INNER_HTML, "Required field.");
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderThePassword, Attribute.INNER_HTML, "Required field.");
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderTheConfirmNewPassword, Attribute.INNER_HTML, "Required field.");
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderTheSecurityQuestion, Attribute.INNER_HTML, "Required field.");
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderTheSecurityAnswer, Attribute.INNER_HTML, " Required field."); // change here
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void userId () {
+		wait.until(ExpectedConditions.visibilityOf(userId));
 		verifyLengthOfTheFieldContent(userId, Attribute.MAX_LENGTH, "74");
 		/*
 		 We have create user id, by 5, 74 characters, without letter, user any email, 
@@ -843,15 +901,15 @@ public class NewUserRegistration {
 			- Cannot contain more than 1 consecutive special character.
 		 */
 		inputTextThenClickTab(userId, "&^%*&#^$%");
-		pause(3000);
+		//pause(3000);
 		verifyErrorMessageUnderTheField(referToRequirementErrorMessageUnderTheUserIdField, Attribute.INNER_HTML, "Please refer to User ID requirements.");
-		pause(3000);
+		//pause(3000);
 		clearTextFromTheField(userId);
-		pause(3000);
+		//pause(3000);
 		verifyErrorMessageUnderTheField(requiredFieldErrorMessageUnderTheUserId, Attribute.INNER_HTML, "Required field.");
-		pause(3000);		
+		//pause(3000);		
 		inputText(userId, "Enthrall_20221");
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void password () {
@@ -864,9 +922,9 @@ public class NewUserRegistration {
 	
 	public void securityQuestion () {
 		selectElelementFromDropdownOnebyOne(securityQuestion, securityQuestionList);
-		pause(3000);
+		//pause(3000);
 		selectDropdown(securityQuestion, "What was the first thing you learned to cook?");
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void securityAnswer () {
@@ -874,57 +932,57 @@ public class NewUserRegistration {
 	}
 	
 	public void happy_path_step_three() {
+		wait.until(ExpectedConditions.visibilityOf(userId));
 		inputTextThenClickTab(userId, "Enthrall_20221");
-		pause(3000);
+		//pause(3000);
 		inputTextThenClickTab(password, "EIT@2024eit@2024");
-		pause(3000);
+		//pause(3000);
 		inputTextThenClickTab(confirmNewPassword, "EIT@2024eit@2024");
-		pause(3000);
+		//pause(3000);
 		selectDropdown(securityQuestion, "What was the first thing you learned to cook?");
-		pause(3000);
+		//pause(3000);
 		inputText(securityAnswer, "Rice");
-		pause(3000);		
+		//pause(3000);		
 	}
 	
 	public void summary_page_title_and_header () {
 		verifyTitle(driver, "CMS Enterprise Portal - New User Registration");
 		verifyCurrentUrl(driver, "https://portal.cms.gov/portal/newuserregistration");
-		pause(3000);
+		//pause(3000);
+		wait.until(ExpectedConditions.visibilityOf(summaryPageHeader));
 		validationOfHeader(summaryPageHeader, "New User Registration Summary");
 		validationOfSubHeader(summaryPageSubHeader, "Please review your information and make any necessary changes before submitting .");
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void click_on_cancel_button_on_summary_page_direct_to_homepage() {
+		wait.until(ExpectedConditions.visibilityOf(summaryPageCancel));
 		elementEnabled(summaryPageCancel);
 		verifyTextOfTheWebElement(summaryPageCancel, "Cancel");
-		pause(4000);
+		//pause(4000);
 		clickElement(summaryPageCancel);
-		pause(4000);
+		//pause(4000);
 		verifyCurrentUrl(driver, "https://portal.cms.gov/portal/");
 		verifyTitle(driver, "CMS Enterprise Portal");
-		pause(4000);
+		//pause(4000);
 	}
 	
 	public void click_on_submit_user_button_of_summary_page() {
+		wait.until(ExpectedConditions.visibilityOf(summaryPageCancel));
 		scrollIntoViewTheElementUsingJavascriptExecutor(driver, summaryPageCancel);
 		elementEnabled(submitUser);
 		verifyTextOfTheWebElement(submitUser, "Submit User");
-		pause(3000);
+		//pause(3000);
 		clickElement(submitUser);
-		pause(3000);
+		//pause(3000);
 	}
 	
 	public void success_message () {
+		wait.until(ExpectedConditions.visibilityOf(successMessage));
 		verifyTitle(driver, "CMS Enterprise Portal - New User Registration");
 		verifyCurrentUrl(driver, "https://portal.cms.gov/portal/newuserregistration");
-		pause(3000);
+		//pause(3000);
 		verifyTextOfTheWebElement(successMessage, "Your User ID has been successfully registered with CMS Enterprise Portal. An email has been sent to your registered email address.");
-		pause(3000);
+		//pause(3000);
 	}
-	
-	
-	
-	
-
 }
