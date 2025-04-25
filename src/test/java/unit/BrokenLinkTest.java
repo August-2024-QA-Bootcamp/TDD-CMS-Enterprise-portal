@@ -1,6 +1,6 @@
 package unit;
 
-import java.io.IOException;
+// Removed unused import
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
