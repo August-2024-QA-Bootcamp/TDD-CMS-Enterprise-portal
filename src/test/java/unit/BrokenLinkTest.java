@@ -1,6 +1,5 @@
 package unit;
 
-// Removed unused import
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -77,6 +76,7 @@ public class BrokenLinkTest extends BaseClass {
 		}
 
 		System.err.println("Total broken links = " + brokenLinkUrls.size());
+		
 		System.out.println(brokenLinkUrls);
 	}
 }
